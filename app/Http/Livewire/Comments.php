@@ -22,7 +22,6 @@ class Comments extends Component
 
     public function addcomment()
     {
-       
         if($this->newcomment == '') {
             return ;
         }
