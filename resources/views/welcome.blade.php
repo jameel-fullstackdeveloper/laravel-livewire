@@ -25,7 +25,6 @@
         </div>
 
         <div class="w-7/12 mx-2 rounded border p-2">
-            <h1 class="text-4xl font-medium capitalize">Comments</h1>
             <livewire:comments />
         </div>
    </div>

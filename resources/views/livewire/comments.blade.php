@@ -1,5 +1,8 @@
 <div>
 
+<h1 class="my-10 text-3xl">Comments</h1>
+@error('newcomment') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+
  <form wire:submit.prevent="addcomment" class="my-4 flex">
         <input type="text" class="w-full rounded border shadow p-2 mr-2 my-2" 
         placeholder="What's in your mind." wire:model.lazy="newcomment">

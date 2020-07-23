@@ -22,9 +22,7 @@ class Comments extends Component
 
     public function addcomment()
     {
-        if($this->newcomment == '') {
-            return ;
-        }
+        $this->validate(['newcomment' => 'required' ]);
 
         $createdcomment = Comment::create([
             'body' => $this->newcomment,
