@@ -3,23 +3,18 @@
 namespace App\Http\Livewire;
 
 use App\Comment;
-use Livewire\Component;
 use Carbon\Carbon;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class Comments extends Component
 {
+    use WithPagination;
 
-    public $comments;
     public $newcomment;
+    public $ticketId ;
 
   
-    public function mount() {
-
-        $initalcomments = Comment::latest('id')->get();
-        $this->comments = $initalcomments;
-    }
-
-
     public function addcomment()
     {
         $this->validate(['newcomment' => 'required|max:255' ]);
@@ -30,7 +25,7 @@ class Comments extends Component
             'support_ticket_id' => 2
         ]);
 
-       $this->comments->prepend($createdcomment);
+      // $this->comments->prepend($createdcomment);
 
        $this->newcomment = '';
 
@@ -46,7 +41,7 @@ class Comments extends Component
 
         $comment->delete();
 
-        $this->comments = $this->comments->except($commentid);
+       // $this->comments = $this->comments->except($commentid);
 
         session()->flash('message', 'Comment successfully deleted.');
     }
@@ -54,6 +49,8 @@ class Comments extends Component
 
     public function render()
     {
-        return view('livewire.comments');
+        return view('livewire.comments', [
+            'comments' => Comment::where('support_ticket_id', 2)->latest()->paginate(2),
+        ]);
     }
 }
