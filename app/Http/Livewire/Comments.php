@@ -22,7 +22,7 @@ class Comments extends Component
 
     public function addcomment()
     {
-        $this->validate(['newcomment' => 'required' ]);
+        $this->validate(['newcomment' => 'required|max:255' ]);
 
         $createdcomment = Comment::create([
             'body' => $this->newcomment,
@@ -34,6 +34,17 @@ class Comments extends Component
 
        $this->newcomment = '';
 
+
+    }
+
+    public function remove($commentid)
+    {
+
+        $comment = Comment::find($commentid);
+
+        $comment->delete();
+
+        $this->comments = $this->comments->except($commentid);
 
     }
 
